@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+
+    <title>Meetings</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#date1').datetimepicker();
+        });
+        $(function () {
+            $('#date2').datetimepicker();
+        });
+    </script>
+
+    <style>
+        h1, h2, h3, h4, h5, h6 {
+            font-family: verdana, fantasy;
+            color: deeppink;
+            border-bottom: 1px solid rgb(200, 200, 200);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div th:replace="~{navbar :: navigation(Meetings)}"/>
+
+    <h2 style="text-align:center" >Meetings</h2>
+    <form style="margin-top: 10px" action="/meetings" method="get" class="form-inline">
+        <div class="col">
+            <span>from:</span>
+            <input type="text" id="date1" name="startDate" placeholder="mm/dd/yyyy hh:mm" />
+            <span class="add-on">
+                    <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                </span>
+        </div>
+        <div class="col">
+            <span>to:</span>
+            <input type="text" id="date2" name="endDate" placeholder="mm/dd/yyyy hh:mm" />
+            <span class="add-on">
+                    <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                </span>
+        </div>
+        <div class="form-inline">
+            <label class="my-1 mr-2" for="lectureHallPlace">Lecture hall place:</label>
+            <select class="custom-select my-1 mr-sm-2" name="lectureHallPlace" id="lectureHallPlace">
+                <option selected>any</option>
+                <option>LIBRARY</option>
+                <option>MAIN_BUILDING</option>
+                <option>CULTURE_CENTER</option>
+            </select>
+        </div>
+        <button style="background-color: black; border-color: gray"class="btn btn-primary" type="submit">Find</button>
+    </form>
+
+    <table style="text-align:center" th:if="${meetings.size() > 0}" class="table">
+        <thead class="thead-dark">
+        <tr>
+            <td>Date</td>
+            <td>Conference</td>
+            <td>Lecture hall name</td>
+            <td>Lecture hall place</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="meeting : ${meetings}">
+            <td th:text="${meeting.date}"></td>
+            <td th:text="${meeting.conference.name}"></td>
+            <td th:text="${meeting.hall.name}"></td>
+            <td th:text="${meeting.hall.lectureHallPlace}"></td>
+            <td th:if="${isAdmin}">
+                <a style="background-color: deeppink; border-color: gray" class="btn btn-danger" th:href="@{'/delete/meeting/' + ${meeting.id}}" th:method="delete">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

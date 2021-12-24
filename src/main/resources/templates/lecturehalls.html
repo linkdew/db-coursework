@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+
+    <title>Halls</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <style>
+        h1, h2, h3, h4, h5, h6 {
+            font-family: verdana, fantasy;
+            color: deeppink;
+            border-bottom: 1px solid rgb(200, 200, 200);
+        }
+    </style>
+</head>
+
+<div class="container">
+    <div th:replace="~{navbar :: navigation(Halls)}"/>
+
+    <h2 style="text-align:center" >Lecture halls</h2>
+    <table style="text-align:center" th:if="${halls.size() > 0}" class="table">
+        <thead class="thead-dark">
+        <tr>
+            <td>Name</td>
+            <td>Capacity</td>
+            <td>Place</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="hall : ${halls}">
+            <td th:text="${hall.name}"></td>
+            <td th:text="${hall.capacity}"></td>
+            <td th:text="${hall.lectureHallPlace}"></td>
+            <td th:if="${isAdmin && hall.getMeetings().isEmpty()}">
+                <a style="background-color: deeppink; border-color: gray; padding: 6px 32px;" class="btn btn-danger" th:href="@{'/delete/hall/' + ${hall.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <td th:if="${isAdmin}">
+        <a style="background-color: black; border-color: gray; padding: 6px 32px; margin: 12px 12px;" class="btn btn-primary" th:href="@{'/add/hall/'}">Add</a>
+    </td>
+</div>
+
+</body>
+</html>

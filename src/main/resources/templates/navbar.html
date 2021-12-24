@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <style>
+        nav, h2, div, ul, li, a {
+            font-family: verdana, fantasy;
+            color: deeppink;
+            border-bottom: 1px solid rgb(200, 200, 200);
+        }
+    </style>
+</head>
+
+<div th:fragment="navigation(activeTab)">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-center myStyle">
+        <div class="collapse navbar-collapse myStyle" id="navbarNav">
+            <ul class="navbar-nav myStyle">
+                <li class="nav-item myStyle" th:classappend="${activeTab == 'Conferences' ? 'active' : ''}">
+                    <a class="nav-link myStyle" th:href="@{/conferences}">Conferences</a>
+                </li>
+                <li class="nav-item" th:classappend="${activeTab == 'Meetings' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/meetings}">Meetings</a>
+                </li>
+                <li class="nav-item" th:classappend="${activeTab == 'Lecture halls' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/halls}">Lecture halls</a>
+                </li>
+                <li class="nav-item" th:classappend="${activeTab == 'Users' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/users}">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login}">Login</a>
+                </li>
+                <li class="nav-item" th:classappend="${activeTab == 'Register' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/register}">Register</a>
+                </li>
+                <li class="nav-item" >
+                    <form th:action="@{/logout}" method="POST">
+                        <input type="submit" style="background-color: black; border-color: gray" class="btn btn-primary" value="Logout" />
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

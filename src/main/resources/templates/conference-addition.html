@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+
+    <title>Add conference</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <style>
+        h1, h2, h3, h4, h5, h6 {
+            font-family: verdana, fantasy;
+            color: deeppink;
+            border-bottom: 1px solid rgb(200, 200, 200);
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{navbar :: navigation(Conferences)}"></div>
+    <h2 style="text-align:center">Conference addition menu</h2>
+
+    <form action="/add/conference" method="post" style="position: center; padding-top: 20px">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Name:</label>
+            <div class="col-sm-6">
+                <input type="text" name="name" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Lecturer:</label>
+            <div class="col-sm-6">
+                <input type="text" name="lecturer" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Info:</label>
+            <div class="col-sm-6">
+                <input type="text" name="info" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Description:</label>
+            <div class="col-sm-6">
+                <textarea class="form-control" name="description" rows="5"></textarea>
+            </div>
+        </div>
+
+        <button style="background-color: black; border-color: gray; padding: 10px 32px; margin: 12px 12px;" class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

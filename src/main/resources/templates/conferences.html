@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8"/>
+
+    <title>Conferences</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <style>
+        h1, h2, h3, h4, h5, h6 {
+            font-family: verdana, fantasy;
+            color: deeppink;
+            border-bottom: 1px solid rgb(200, 200, 200);
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div th:replace="~{navbar :: navigation(Conferences)}"/>
+
+    <h2 style="text-align:center" >Conferences</h2>
+    <table style="text-align:center" th:if="${conferences.size() > 0}" class="table">
+        <thead class="thead-dark">
+        <tr>
+            <td>Name</td>
+            <td>Lecturer</td>
+            <td>Info</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="conference : ${conferences}">
+            <td th:text="${conference.name}"/>
+            <td th:text="${conference.lecturer}"/>
+            <td th:text="${conference.info}"/>
+            <td>
+                <a style="background-color: black; border-color: gray; padding: 6px 32px;" class="btn btn-primary" th:href="@{'/conference/' + ${conference.id}}">Details</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <td th:if="${isAdmin}">
+        <a style="background-color: black; border-color: gray; padding: 6px 32px; margin: 12px 12px;" class="btn btn-primary" th:href="@{'/add/conference/'}">Add</a>
+    </td>
+</div>
+</body>
+</html>
